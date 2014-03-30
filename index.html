@@ -1,0 +1,31 @@
+<html ng-app="VotingApp">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <title>PilotDC voting</title>
+        <link rel="stylesheet" href="css/master.css" type="text/css" />
+    </head>
+    <body ng-controller="AppController">
+        <form ng-submit="setName()" ng-if="!userName">
+            <h2>PilotDC voting</h2>
+            <p>Voting is simple. Just type in your name, and then tap on projects that you like. We'll tally those up as votes.</p>
+            <input ng-model="inputs.typedName" placeholder="Your name" type="text" />
+            <button type="submit">Submit</button>
+        </form>
+        <div ng-show="userName" id="teams">
+            <div id="header">
+                <input placeholder="Filter teams" ng-model="inputs.filter" type="text" id="search" />
+                <span ng-click="clear()" id="clear">Clear</span>
+            </div>
+            <ul>
+                <li ng-repeat="team in teams | filter: inputs.filter" ng-class="{upVoted: team.upVoted}" ng-click="toggleTeamVote(team)">
+                    <h3>{{ team.name }}</h3>
+                </li>
+            </ul>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-cookies.min.js"></script>
+        <script src="//cdn.jsdelivr.net/fastclick/1.0.0/fastclick.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
